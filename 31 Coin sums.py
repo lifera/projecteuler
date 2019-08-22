@@ -20,7 +20,7 @@ How many different ways can £2 be made using any number of coins?
 #
 #
 def solution():
-    coins = [100, 50, 20, 10, 5, 2, 1]
+    # coins = [100, 50, 20, 10, 5, 2, 1]
     different_ways = 0
 
     rest = 200
@@ -38,12 +38,33 @@ def solution():
                             rest = 200 - a1 - a2 - a3 - a4 - a5 - a6
                             for a7 in range(0, rest+1, 2):
                                 a = 200 - a1 - a2 - a3 - a4 - a5 - a6 - a7
-                                print(a)
                                 if a >= 0:
                                     different_ways += 1
-
 
     print(different_ways)
 
 
+def solution2():
+    coins, different_ways = (2, 5, 10, 20, 50, 100, 200), 201 * [1]
+    for coin in coins:
+        print(different_ways)
+        for i in range(coin, len(different_ways)):
+            different_ways[i] += different_ways[i - coin]
+    print(different_ways[-1])
+
+
+def off_solution():
+    coins = [200, 100, 50, 20, 10, 5, 2, 1]
+    amount = 200
+    ways = [0] * (amount+1)
+    ways[0] = 1
+    for i in range(8):
+        for j in range(coins[i], amount+1):
+            ways[j] = ways[j] + ways[j - coins[i]]
+
+    print(ways[200])
+
+
 solution()
+solution2()
+off_solution()
