@@ -71,19 +71,19 @@ def is_truncatable_prime(n: int) -> bool:
 
 
 def solution2():
-    def rec_check_next_prime(n: int):
+    def recursion_check_next_prime(n: int):
         for next_candidate in numbs_to_check:
             check_number = int(str(n) + str(next_candidate))
             if is_prime(check_number):
                 if is_truncatable_prime(check_number):
                     truncatable_primes.add(check_number)
-                rec_check_next_prime(check_number)
+                recursion_check_next_prime(check_number)
 
     truncatable_primes = set()
     numbs_to_check = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
     for i in numbs_to_check:
         if is_prime(i):
-            rec_check_next_prime(i)
+            recursion_check_next_prime(i)
 
     print(truncatable_primes)
     print(f'truncatable_primes sum = {sum(truncatable_primes)} len = {len(truncatable_primes)}')
